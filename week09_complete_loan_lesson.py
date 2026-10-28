@@ -119,7 +119,7 @@ print(f"Monthly savings contribution: ${savings_payment:.2f}")
 # 12000       | 6        | 5     | $231.99
 # 24000       | 6        | 5     | $463.99
 # 10000       | 12       | 1     | $888.49
-# For a $12,000 savings goal at 6% for 5 years, monthly deposits are $173.32.
+# For a $12,000 savings goal at 6% for 5 years, monthly deposits are $171.99.
 # Trace the first loan case: years=5 -> n=60; annual_rate_percent=6 -> r=0.005.
 # Doubling the principal with the same rate and term doubles the unrounded
 # payment. Explain why displayed cents may not appear to double exactly.
