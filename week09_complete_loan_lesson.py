@@ -78,6 +78,21 @@ def monthly_loan_payment(loan_amount, annual_rate_percent, years):
     return payment
 
 
+# WEEKEND TRANSFER: Coordinate helpers to calculate monthly savings deposits.
+def monthly_savings_payment(savings_goal, annual_rate_percent, years):
+    """Return the monthly deposit needed to reach a savings goal.
+
+    Assumes zero starting savings, monthly compounding, and month-end deposits.
+    Use payment_periods and monthly_interest_rate. Return the unrounded amount.
+    Do not request input or print. Inputs are not validated.
+    """
+    n = payment_periods(years)
+    r = monthly_interest_rate(annual_rate_percent)
+    if r == 0:
+        return savings_goal / n
+    return savings_goal * r / ((1 + r) ** n - 1)
+
+
 # CALLING CODE: Function definitions above do not execute their bodies yet.
 # input returns text. float converts decimal input; int converts whole years.
 # Enter 5 for years, not 5.0. The helpers perform unit conversion, not casting.
@@ -92,17 +107,19 @@ payment = monthly_loan_payment(loan_amount, annual_rate_percent, years)
 # Format only the displayed result; the calculation retains its precision.
 print(f"Monthly payment: ${payment:.2f}")
 
+# Request a savings goal and display the monthly deposit needed to reach it.
+savings_goal = float(input("Savings goal in dollars: "))
+savings_payment = monthly_savings_payment(
+    savings_goal, annual_rate_percent, years
+)
+print(f"Monthly savings contribution: ${savings_payment:.2f}")
+
 # VERIFY by running this program separately for each case:
-# Loan amount | Annual % | Years | Expected display
+# Loan amount | Annual % | Years | Expected loan payment
 # 12000       | 6        | 5     | $231.99
 # 24000       | 6        | 5     | $463.99
 # 10000       | 12       | 1     | $888.49
-# Trace the first case: years=5 -> n=60; annual_rate_percent=6 -> r=0.005.
+# For a $12,000 savings goal at 6% for 5 years, monthly deposits are $173.32.
+# Trace the first loan case: years=5 -> n=60; annual_rate_percent=6 -> r=0.005.
 # Doubling the principal with the same rate and term doubles the unrounded
 # payment. Explain why displayed cents may not appear to double exactly.
-
-# WEEKEND TRANSFER: Reuse these helpers for monthly savings contributions.
-# Write a new narrative, header, docstring, prompt, implementation, and tests
-# for monthly_savings_payment(savings_goal, annual_rate_percent, years).
-# Assume zero starting savings and month-end deposits with monthly compounding.
-# The savings implementation belongs to the weekend assignment.
